@@ -16,6 +16,7 @@ from livekit.plugins import google
 from tools.weather import get_weather
 from tools.location import find_saved_location, save_location
 from tools.websearch import web_search
+from tools.computer import open_application
 
 
 load_dotenv()
@@ -142,7 +143,16 @@ WEB SEARCH RULES:
 
 15. After receiving search results, use the relevant information
     to answer the user's question clearly and concisely.
+COMPUTER CONTROL RULES:
 
+16. Use open_application_tool when the user asks you to open
+    an application on the Mac.
+
+17. Only request applications that are allowed by the computer
+    control tool.
+
+18. Do not claim an application was opened unless the tool
+    reports success.
 """
         )
 
@@ -305,7 +315,15 @@ WEB SEARCH RULES:
                     f"I could not save the location: {error}"
                 ),
             }
+    @function_tool
+    async def open_application_tool(self, application: str):
+        """
+        Open an approved macOS application.
 
+        Only applications allowed by the computer control
+        security policy can be opened.
+        """
+        return open_application(application)
     @function_tool
     async def web_search_tool(self, query: str):
         """
