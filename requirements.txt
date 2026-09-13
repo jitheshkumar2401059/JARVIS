@@ -1,0 +1,18 @@
+# LiveKit voice agent
+livekit-agents==1.7.1
+livekit-plugins-google==1.7.1
+
+# Google Gemini SDK
+google-genai==2.20.0
+
+# Environment variables
+python-dotenv==1.2.3
+
+# HTTP requests
+requests==2.34.2
+
+# Location fuzzy matching
+RapidFuzz==3.14.5
+
+# Web search
+tavily-python==0.8.2

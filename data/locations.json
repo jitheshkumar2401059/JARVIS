@@ -1,0 +1,37 @@
+{
+    "Mulligoor": {
+        "latitude": 11.279946,
+        "longitude": 76.618983,
+        "district": "Nilgiris",
+        "state": "Tamil Nadu",
+        "country": "India"
+    },
+    "Manjoor": {
+        "latitude": 11.2681786,
+        "longitude": 76.6406051,
+        "district": "Nilgiris",
+        "state": "Tamil Nadu",
+        "country": "India"
+    },
+    "Attubail, Nilgiris, India": {
+        "latitude": 11.32931,
+        "longitude": 76.62355,
+        "district": null,
+        "state": null,
+        "country": "India"
+    },
+    "Coimbatore, Coimbatore North, Coimbatore, Tamil Nadu, 641001, India": {
+        "latitude": 11.0018115,
+        "longitude": 76.9628425,
+        "district": null,
+        "state": null,
+        "country": "India"
+    },
+    "Emerald, Kundah, Nilgiris, Tamil Nadu, 643225, India": {
+        "latitude": 11.3205218,
+        "longitude": 76.6247071,
+        "district": null,
+        "state": null,
+        "country": "India"
+    }
+}
