@@ -16,7 +16,14 @@ from livekit.plugins import google
 from tools.weather import get_weather
 from tools.location import find_saved_location, save_location
 from tools.websearch import web_search
-from tools.computer import open_application
+from tools.computer import (
+    open_application,
+    close_application,
+    is_application_running,
+    list_approved_applications,
+    restart_application,
+    focus_application,
+)
 
 
 load_dotenv()
@@ -152,6 +159,43 @@ COMPUTER CONTROL RULES:
     control tool.
 
 18. Do not claim an application was opened unless the tool
+    reports success.
+19. Use close_application_tool when the user asks you to close
+    an application on the Mac.
+
+20. Do not claim an application was closed unless the tool
+    reports success.
+21. Use check_application_tool when the user asks whether an
+    application is open or currently running.
+
+22. Report the running status returned by the tool accurately.
+    Do not claim an application is running unless the tool
+    reports running as true.
+23. Use list_applications_tool when the user asks which
+    applications you can control or which applications are
+    approved for computer control.
+
+24. Report the applications returned by the tool accurately.
+25. Restarting an application is a potentially disruptive action.
+
+26. When the user asks to restart an application, do NOT call
+    restart_application_tool immediately.
+
+27. First ask the user for confirmation:
+    "Do you want me to restart <application>?"
+
+28. Only call restart_application_tool if the user clearly confirms
+    with a positive response such as "yes", "confirm", or "do it".
+
+29. If the user declines or gives an unclear response, do not restart
+    the application.
+
+30. Do not claim that an application was restarted unless the
+    restart_application_tool reports success.
+31. Use focus_application_tool when the user asks you to focus,
+    switch to, or bring an approved application to the front.
+
+32. Do not claim an application was focused unless the tool
     reports success.
 """
         )
@@ -324,6 +368,35 @@ COMPUTER CONTROL RULES:
         security policy can be opened.
         """
         return open_application(application)
+    @function_tool
+    async def close_application_tool(self, application: str):
+        """
+        Close an approved macOS application.
+
+        Only applications allowed by the computer control
+        security policy can be closed.
+        """
+        return close_application(application)
+    @function_tool
+    async def check_application_tool(self, application: str):
+        """
+        Check whether an approved macOS application is running.
+        """
+        return is_application_running(application)
+    @function_tool
+    async def restart_application_tool(self, application: str):
+        """Restart an approved application after user confirmation."""
+        return restart_application(application)
+    @function_tool
+    async def list_applications_tool(self):
+        """
+        List the applications approved for computer control.
+        """
+        return list_approved_applications()
+    @function_tool
+    async def focus_application_tool(self, application: str):
+        """Bring an approved application to the front."""
+        return focus_application(application)
     @function_tool
     async def web_search_tool(self, query: str):
         """
